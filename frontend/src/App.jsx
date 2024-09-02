@@ -1,9 +1,10 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-const App = () => {
+import './App.css'
+import FirstPage from './components/Firstpage/Firstpage.jsx'
+function App() {
+
   return (
     <>
-       <Navbar/>
+      <FirstPage />
     </>
   )
 }
