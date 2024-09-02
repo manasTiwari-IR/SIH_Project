@@ -1,10 +1,12 @@
 import './App.css'
-import FirstPage from './components/Firstpage/Firstpage.jsx'
+// import FirstPage from './components/Firstpage/Firstpage.jsx'
+import LoginPage from './components/LoginPage/login.jsx'
+// import SignUpPage from './components/SignUp/SignUp.jsx'
 function App() {
 
   return (
     <>
-      <FirstPage />
+      <LoginPage />
     </>
   )
 }
