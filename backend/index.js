@@ -10,7 +10,9 @@ app.use(express.json({ limit: '10mb' }))//middleware required for req.body
 app.get('/', (req, res) => { //testing
   res.send('Hello Sutau!')
 })
-// app.use('/api/auth' , require('./routes/auth')) //for login/signup etc
+app.use('/api/auth' , require('./routes/auth'))
+app.use('/api/jobposting' , require('./routes/jobposting'))
+app.use('/api/addskills' , require('./routes/addskills'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
