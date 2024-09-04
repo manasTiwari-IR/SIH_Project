@@ -36,8 +36,8 @@
     background-color: rgb(95, 43, 186);
     color: white;
     font-weight: bolder;
-    font-size: larger;
-    border-radius: 10px;
+    font-size: 16px;
+    border-radius: 12px;
 }
 .arrow{
     padding-top: 10px;

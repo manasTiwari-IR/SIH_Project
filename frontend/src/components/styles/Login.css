@@ -5,7 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #3f96e1f2, rgb(220, 219, 219));
+    /* background: linear-gradient(to bottom, #3f96e1f2, rgb(220, 219, 219)); */
+    background-color: #c9e9fc;
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
@@ -70,6 +71,7 @@ label {
     margin-bottom: 0.5em;
     color: #666;
     font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .form-group input {

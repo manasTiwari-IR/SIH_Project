@@ -17,7 +17,7 @@ function Alert(props) {
     const alertType = props.alert ? alertStyles[props.alert.type] || '' : '';
 
     return (
-        <div style={{ height: '50px',width:'100vw',position:'absolute' }} className='z-30'>
+        <div style={{ height: '50px',width:'100%',position:'absolute' }} className='z-30'>
             {props.alert && (
                 <div className={`relative p-4 mb-4 border-l-4 rounded ${alertType}`} role="alert">
                     <strong className="font-bold">{capitalize(props.alert.type)}</strong>: {props.alert.msg}

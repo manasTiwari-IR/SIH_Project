@@ -45,6 +45,7 @@ export default function Navbar(props) {
     { name: "CreatePost", href: "/createpost", toshow: user.isCompany },
     { name: "Search", href: "/search", toshow: true },
     { name: "Courses", href: "/courses", toshow: !user.isCompany },
+    { name: "AddSkills", href: "/addskills", toshow: !user.isCompany },
     { name: "Resume", href: "/resume", toshow: !user.isCompany },
     { name: "Mentoring", href: "/mentoring", toshow: !user.isCompany },
   ];
@@ -95,7 +96,7 @@ export default function Navbar(props) {
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-800 ">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
@@ -348,7 +349,7 @@ export default function Navbar(props) {
                         <button
                           type="submit"
                           className="bg-blue-500 text-white px-4 py-2 rounded mt-10 min-w-full"
-                          
+
                         >
                           Upload
                         </button>
