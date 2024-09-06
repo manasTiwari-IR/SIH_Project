@@ -16,7 +16,7 @@ const ErrorPage = () => {
           The page you are looking for might be temporarily
           unavailable or you are accessing something you shouldn't
         </p>
-        <Link  to="/"><div className="btn">Back to homepage</div></Link>
+        <Link  to="/"><div className="errorbtn">Back to homepage</div></Link>
       </div>
     </div>
     </div>

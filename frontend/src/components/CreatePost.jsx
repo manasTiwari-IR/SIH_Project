@@ -10,7 +10,7 @@ function CreatePost(props) {
         Description:"",
         location:"",
         CompanyEmail:"",
-        ContactNum:9,
+        ContactNum:0,
       });
       const navigate=useNavigate()
       const handleSubmit = async (e) => {
@@ -84,8 +84,7 @@ function CreatePost(props) {
                             <label htmlFor="contactNumber">Contact Number :</label>
                             <input type="tel" className="form-control" id="contactNumber"
                                 minLength={10}
-                                maxLength={10} placeholder="Enter contact 
-                                number" 
+                                maxLength={10} placeholder="Enter contact number" 
                                 onChange={onChange}
                                 value={Info.ContactNum}
                                 name="ContactNum"

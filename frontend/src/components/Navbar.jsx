@@ -56,6 +56,12 @@ export default function Navbar(props) {
       setLogged(true);
       updateUser();
     }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLogged(true);
+    }
   }, [updateUser]);
   
   let location = useLocation();
