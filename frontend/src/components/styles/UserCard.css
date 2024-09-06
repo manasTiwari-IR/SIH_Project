@@ -1,0 +1,67 @@
+.usercard{
+    background-color: #E0FFFF;
+    border: 3px solid rgba(52, 48, 48, 0.667);
+    outline: 1px solid black;
+    border-radius: 20px;
+    width:320px;
+    min-height: 400px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin: 20px;
+}
+.pfp{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+.first{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding:10px 20px;
+    font-size: xx-large;
+    font-weight: bolder;
+    font-family:monospace;
+}
+.second{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size:90%;
+}
+.title{
+    color: rgb(62, 58, 70);
+    font-family:monospace;
+    font-size: 14px;
+}
+.about{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.about .title{
+    font-size: large;
+}
+.desc{
+    margin-top: 10px;
+    padding:5px;
+    background-color: rgba(128, 128, 128, 0.16);
+    border-radius: 20px;
+    font-family:monospace;
+    font-size: larger;
+}
+.languages{
+    display: flex;
+    flex-wrap: wrap;
+}
+.lang{
+    background-color: rgba(120, 119, 119, 0.4);
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: bolder;
+    margin:2px 5px;
+}

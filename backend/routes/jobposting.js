@@ -6,23 +6,23 @@ router.post('/createpost', async (req, res) => {
     try {
         if (!req.body.CompanyName) {
             console.error(error.message);
-            res.status(500).send("CompanyName Not Provided")
+            res.status(500).json({success:false,error:"CompanyName Not Provided"})
         }
         if (!req.body.description) {
             console.error(error.message);
-            res.status(500).send("description Not Provided")
+            res.status(500).json({success:false,error:"description Not Provided"})
         }
         if (!req.body.joblocation) {
             console.error(error.message);
-            res.status(500).send("joblocation Not Provided")
+            res.status(500).json({success:false,error:"joblocation Not Provided"})
         }
         if (!req.body.contactEmail) {
             console.error(error.message);
-            res.status(500).send("contactEmail Not Provided")
+            res.status(500).json({success:false,error:"contactEmail Not Provided"})
         }
         if (!req.body.contactNumber) {
             console.error(error.message);
-            res.status(500).send("contactNumber Not Provided")
+            res.status(500).json({success:false,error:"contactNumber Not Provided"})
         }
         let jobPost = JobPost.create({
             CompanyName: req.body.CompanyName,
@@ -31,21 +31,22 @@ router.post('/createpost', async (req, res) => {
             contactEmail: req.body.contactEmail,
             contactNumber: req.body.contactNumber,
         })
-        res.json(jobPost)
+        res.json({success:true,
+            jobPost:jobPost})
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Internal server error")
+        res.status(500).json({success:false,error:"Internal server Error!"})
     }
 })
 
 //get all jobposts 
 router.get('/getjobposts', async (req, res) => {
     try {
-        const jobPosts = JobPost.find();
-        res.send(jobPosts)
+        const jobPosts = await JobPost.find();
+        res.json({ success: true, jobPosts });
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Internal server error")
+        res.status(500).json({ success: false, error: "Internal Server Error!" });
     }
-})
+});
 module.exports = router

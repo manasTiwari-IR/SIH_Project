@@ -1,0 +1,22 @@
+.card{
+    border: 3px solid black;
+    background-color: #E0FFFF;
+    border: 3px solid rgba(52, 48, 48, 0.667);
+    outline: 1px solid black;
+    width: 350px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    font-family: monospace;
+    font-weight: bolder;
+    row-gap: 10px;
+    /* padding-top: 10px; */
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+span{
+   color: rgb(65, 65, 108);
+   font-size: 18px;
+}

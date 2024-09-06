@@ -1,19 +1,33 @@
-const privateKey = "$Thequickbrownfoxjumpsoverthelazydog$" //private key for AUTH token
-var jwt=require('jsonwebtoken'); 
-const fetchuser =(req,res,next)=>{
-    const AuthToken=req.header('AuthToken') 
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const privateKey = "$Thequickbrownfoxjumpsoverthelazydog$";
 
-    //check if token exits
-    if(!AuthToken){
-        return res.status(401).send({error:"Invalid Auth Token"});
+const fetchuser = async (req, res, next) => {
+    const AuthToken = req.header('AuthToken');
+    if (!AuthToken) {
+        return res.status(401).send({ error: "Invalid Auth Token" });
     }
+
     try {
-        const data=jwt.verify(AuthToken,privateKey)  //getting the user back from Auth token
-        req.user = data.user;
+        const data = jwt.verify(AuthToken, privateKey);
+        const user = await User.findById(data.user.id).select('-password');
+        if (!user) {
+            return res.status(404).send({ error: "User not found" });
+        }
+
+        req.user = {
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            profilephoto: user.profilephoto,
+            number: user.number
+        };
+
         next();
     } catch (error) {
         console.error(error.message);
-        return res.status(401).send({error:"Invalid Auth Token"})
+        return res.status(401).send({ error: "Invalid Auth Token" });
     }
 }
-module.exports=fetchuser
+
+module.exports = fetchuser;

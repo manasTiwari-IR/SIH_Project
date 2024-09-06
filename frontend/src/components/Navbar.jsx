@@ -40,25 +40,30 @@ export default function Navbar(props) {
   const { user, updateUser } = useUser();
   const [open, setOpen] = useState(false);
   const [ProfileImage, setProfileImage] = useState("");
+  const [Logged, setLogged] = useState(false);
+
   const navigation = [
     { name: "Home", href: "/", toshow: true },
     { name: "CreatePost", href: "/createpost", toshow: user.isCompany },
-    { name: "Search", href: "/search", toshow: true },
-    { name: "Courses", href: "/courses", toshow: !user.isCompany },
     { name: "AddSkills", href: "/addskills", toshow: !user.isCompany },
+    { name: "Courses", href: "/courses", toshow: !user.isCompany },
+    { name: "Search", href: "/search", toshow: true },
     { name: "Resume", href: "/resume", toshow: !user.isCompany },
     { name: "Mentoring", href: "/mentoring", toshow: !user.isCompany },
   ];
   useEffect(() => {
     if (localStorage.getItem("token")) {
+      setLogged(true);
       updateUser();
     }
   }, [updateUser]);
+  
   let location = useLocation();
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     setOpen(false);
+    setLogged(false);
     localStorage.removeItem("token");
     navigate("/login");
   };
@@ -113,39 +118,43 @@ export default function Navbar(props) {
                 </div>
                 <div className="hidden md:block">
                   <div className=" flex items-baseline space-x-4">
-                    {navigation
-                      .filter((item) => item.toshow)
-                      .map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          aria-current={
-                            location.pathname === item.href ? "page" : undefined
-                          }
-                          className={classNames(
-                            location.pathname === item.href
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                        >
-                          <div className="navbars">
-                            {item.name}
-                            {item.name === "Search" ? (
-                              <span className="lord">
-                                <lord-icon
-                                  src="https://cdn.lordicon.com/pagmnkiz.json"
-                                  trigger="hover"
-                                  stroke="bold"
-                                  colors="primary:#ffffff,secondary:#9cf4df"
-                                ></lord-icon>
-                              </span>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </Link>
-                      ))}
+                    {Logged
+                      ? navigation
+                          .filter((item) => item.toshow)
+                          .map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
+                              aria-current={
+                                location.pathname === item.href
+                                  ? "page"
+                                  : undefined
+                              }
+                              className={classNames(
+                                location.pathname === item.href
+                                  ? "bg-gray-900 text-white"
+                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "rounded-md px-3 py-2 text-sm font-medium"
+                              )}
+                            >
+                              <div className="navbars">
+                                {item.name}
+                                {item.name === "Search" ? (
+                                  <span className="lord">
+                                    <lord-icon
+                                      src="https://cdn.lordicon.com/pagmnkiz.json"
+                                      trigger="hover"
+                                      stroke="bold"
+                                      colors="primary:#ffffff,secondary:#9cf4df"
+                                    ></lord-icon>
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </Link>
+                          ))
+                      : ""}
                   </div>
                 </div>
               </div>
@@ -212,25 +221,43 @@ export default function Navbar(props) {
             </div>
           </div>
 
-          <DisclosurePanel className="md:hidden">
+          <DisclosurePanel className="md:hidden ">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  aria-current={
-                    location.pathname === item.href ? "page" : undefined
-                  }
-                  className={classNames(
-                    location.pathname === item.href
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {Logged
+                ? navigation
+                    .filter((item) => item.toshow)
+                    .map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        aria-current={
+                          location.pathname === item.href ? "page" : undefined
+                        }
+                        className={classNames(
+                          location.pathname === item.href
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "block rounded-md px-3 py-2 text-base font-medium"
+                        )}
+                      >
+                        <div className="navbars2">
+                          {item.name}
+                          {item.name === "Search" ? (
+                            <span className="lord">
+                              <lord-icon
+                                src="https://cdn.lordicon.com/pagmnkiz.json"
+                                trigger="hover"
+                                stroke="bold"
+                                colors="primary:#ffffff,secondary:#9cf4df"
+                              ></lord-icon>
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </Link>
+                    ))
+                : ""}
             </div>
             {localStorage.getItem("token") && (
               <div className="border-t border-gray-700 pb-3 pt-4">
@@ -247,16 +274,14 @@ export default function Navbar(props) {
                     />
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
-                      Name
+                    <div className="text-base font-medium leading-none text-white mb-2">
                       {user.name}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      Email
                       {user.email}
                     </div>
-                    <div className="text-base font-medium leading-none text-white">
-                      Contact
+                    <div className="text-base font-medium leading-none text-gray-400 mt-2">
+                      Contact :
                       {user.number}
                     </div>
                   </div>
@@ -343,13 +368,12 @@ export default function Navbar(props) {
                           id="file-upload"
                           accept=".jpeg, .png, .jpg"
                           onChange={handleFileUpload}
-                          style={{ display: "none"}}
+                          style={{ display: "none" }}
                         />
                         {/* <div>choose profile picture to upload</div> */}
                         <button
                           type="submit"
                           className="bg-blue-500 text-white px-4 py-2 rounded mt-10 min-w-full"
-
                         >
                           Upload
                         </button>

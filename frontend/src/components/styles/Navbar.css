@@ -3,6 +3,11 @@
     justify-content: center;
     align-items: center;
 }
+.navbars2{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
 .lord{
     display: flex;
     align-items: center;

@@ -3,25 +3,25 @@ const UserInfo = require('../models/UserInfo');
 const router = express.Router();
 const fetchUser = require('../middleware/FetchUser')
  
-router.get('/getallusers',async(req,res)=>{
+router.get('/getallusers', async (req, res) => {
     try {
-        const userinfos = UserInfo.find().select('-user');
-        res.send(userinfos)
+        const userinfos = await UserInfo.find().select('-user');
+        res.json({ success: true, userinfos });
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Internal server error")
+        res.status(500).send({ success: false, error: "Internal Server Error!" });
     }
-})
+});
 
 router.post('/adduserinfo', fetchUser, async (req, res) => {
     try {
         if (!req.body.description) {
             console.error(error.message);
-            res.status(500).send("description Not Provided")
+            res.status(500).send({success:false,error:"Description Not Provided"})
         }
         if (!req.body.ProgrammingLang) {
             console.error(error.message);
-            res.status(500).send("choose some programming language")
+            res.status(500).send({success:false,error:"Choose some Programming Language"})
         }
         const userinfo = UserInfo.create({
             user: req.user.id,
@@ -32,11 +32,10 @@ router.post('/adduserinfo', fetchUser, async (req, res) => {
             description: req.body.description,
             ProgrammingLang: req.body.ProgrammingLang
         })
-        res.json(userinfo)
-
+        res.json({success:true,userinfo})
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Internal server error")
+        res.status(500).send({success:false,error:"Internal Server Error!"})
     }
 })
 
