@@ -71,7 +71,7 @@ export default function Navbar(props) {
     setOpen(false);
     setLogged(false);
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   };
 
   const createProfile = async (newImage) => {
@@ -106,7 +106,7 @@ export default function Navbar(props) {
   };
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full sticky top-0 z-20">
         <Disclosure as="nav" className="bg-gray-800 ">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
@@ -326,7 +326,7 @@ export default function Navbar(props) {
       {
         //-----------------------------------------------------User Page--------------------------------------
       }
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <Dialog open={open} onClose={setOpen} className="relative z-30">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"

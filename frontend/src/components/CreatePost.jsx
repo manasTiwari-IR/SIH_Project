@@ -19,6 +19,7 @@ function CreatePost(props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "AuthToken": localStorage.getItem('token')
           },
           body: JSON.stringify({
             CompanyName: Info.CompanyName,
@@ -60,7 +61,7 @@ function CreatePost(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="CompanyName">Company Name :</label>
-                            <input type="text" className="form-control" minLength={8} id="CompanyName" name="CompanyName" placeholder="Enter Company's Name" required 
+                            <input type="text" className="form-control" minLength={3} id="CompanyName" name="CompanyName" placeholder="Enter Company's Name" required 
                             onChange={onChange}
                             value={Info.CompanyName} />
                         </div>

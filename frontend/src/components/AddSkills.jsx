@@ -1,6 +1,6 @@
 import "./styles/AddSkills.css";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 function AddSkills(props) {
   const {user,updateUser}=useUser()
@@ -214,7 +214,7 @@ function AddSkills(props) {
               </div>
               <div className="skillNo">
                 Don't have any skills?
-                <button type="button">Learn Skills</button>
+               <Link to='/'><button type="button">Learn Skills</button></Link> 
               </div>
             </div>
             <div className="form-group-skills">

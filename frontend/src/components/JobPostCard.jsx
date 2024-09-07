@@ -4,7 +4,9 @@ const JobPostCard = (props) => {
   return (
     <div className="card1">
       <div className="company_logo">
-        <img src="./src/assets/graduation-hat.png" alt="..." />
+        {(props.item.CompanyLogo)?
+        <img src={props.item.CompanyLogo} alt="" />:
+        <img src="./src/assets/icons8-male-user-50.png" alt="" />}
         <span>{props.item.CompanyName}</span>
       </div>
       <div><span>Description: </span>{props.item.description}</div>

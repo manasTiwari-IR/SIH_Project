@@ -5,16 +5,15 @@ const privateKey = "$Thequickbrownfoxjumpsoverthelazydog$";
 const fetchuser = async (req, res, next) => {
     const AuthToken = req.header('AuthToken');
     if (!AuthToken) {
-        return res.status(401).send({ error: "Invalid Auth Token" });
+        return res.status(401).json({ error: "Auth Token Missing" });
     }
 
     try {
         const data = jwt.verify(AuthToken, privateKey);
         const user = await User.findById(data.user.id).select('-password');
         if (!user) {
-            return res.status(404).send({ error: "User not found" });
+            return res.status(404).json({ error: "User not found" });
         }
-
         req.user = {
             id: user._id,
             email: user.email,
@@ -25,8 +24,8 @@ const fetchuser = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.error(error.message);
-        return res.status(401).send({ error: "Invalid Auth Token" });
+        console.error("Error in fetchuser middleware: ", error);
+        return res.status(401).json({ error: "Invalid Auth Token" });
     }
 }
 

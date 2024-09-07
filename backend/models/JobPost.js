@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const JobPostSchema = new Schema({
+    CompanyLogo:{
+       type:String,
+       default:null
+    },
     CompanyName: {
         type: String,
         required: true
@@ -11,7 +15,7 @@ const JobPostSchema = new Schema({
     },
     joblocation:{
         type:String,
-        require:true
+        required:true
     },
     contactEmail: {
         type: String,
