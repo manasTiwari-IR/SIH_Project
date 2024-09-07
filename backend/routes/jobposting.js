@@ -1,7 +1,7 @@
 const express = require('express');
 const JobPost = require('../models/JobPost.js');
 const router = express.Router();
-const fetchUser = require('../middleware/FetchUser.js');
+const fetchUser =require('../middleware/FetchUser.js')
 
 // Create a job post
 router.post('/createpost', fetchUser, async (req, res) => {

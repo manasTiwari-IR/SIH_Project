@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "both": "concurrently \"npm run dev\" \"nodemon ../backend/index.js\""
+    "both": "concurrently \"npm run dev\" \"nodemon ../backend/index.js\" \"python  ../backend/MLmodels/model1.py\""
   },
   "dependencies": {
     "@headlessui/react": "^2.1.3",

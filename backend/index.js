@@ -13,6 +13,7 @@ app.get('/', (req, res) => { //testing
 app.use('/api/auth' , require('./routes/auth'))
 app.use('/api/jobposting' , require('./routes/jobposting'))
 app.use('/api/addskills' , require('./routes/addskills'))
+app.use('/api/mlmodels' , require('./routes/MLmodels'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
