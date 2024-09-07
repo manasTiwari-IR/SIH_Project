@@ -29,9 +29,9 @@ const Resume = () => {
     'Get Noticed by Employers',
   ];
 
+  const [index, setIndex] = useState(0);
   useEffect(() => {
-    const [index, setIndex] = useState(0);
-
+    setIndex(0);
     const changeText = () => {
       setDynamicText((prev) => {
         const nextIndex = (index + 1) % texts.length;
@@ -156,8 +156,8 @@ return (
               <li>Optimize your resume for ATS (Applicant Tracking Systems).</li>
               <li>Receive real-time feedback on content and structure.</li>
             </ul>
-            <a href="https://novoresume.com" target="_blank" rel="noopener noreferrer" className="btn">Try NovoResume</a>
-            <a href="https://www.zety.com/" target="_blank" rel="noopener noreferrer" className="btn">Explore Zety</a>
+            <a href="https://novoresume.com" target="_blank" rel="noopener noreferrer" className="novobtn mr-10">Try NovoResume</a>
+            <a href="https://www.zety.com/" target="_blank" rel="noopener noreferrer" className="novobtn">Explore Zety</a>
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@ return (
           <p>Upload your resume and check its rating:</p>
           <input type="file" id="resume-upload" className="file-input" onChange={handleFileChange} />
           <p className="file-message">Upload only PDF files with a maximum size of 500KB.</p>
-          <button id="check-resume" className="btn check-resume-btn" onClick={handleCheckResume}>Check Resume</button>
+          <button id="check-resume" className="novobtn check-resume-novobtn" onClick={handleCheckResume}>Check Resume</button>
           <p id="rating-result">{ratingResult}</p>
         </div>
       </div>

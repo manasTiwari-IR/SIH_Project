@@ -14,7 +14,6 @@ function AddSkills(props) {
     "TypeScript",
     "Ruby",
     "Html",
-    "Css",
     "PHP",
     "HTML",
     "CSS",
