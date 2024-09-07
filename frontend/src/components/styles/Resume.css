@@ -74,7 +74,7 @@ body {
     gap: 20px;
 }
 
-.card {
+.card1 {
     background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -84,12 +84,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover {
+.card1:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card h2 {
+.card1 h2 {
     background: linear-gradient(to right, #48a1b3, #5698c1);
     color: white;
     margin: 0;
@@ -113,7 +113,7 @@ body {
 }
 
 ul {
-    list-style-type: disc;
+    list-style-type: none;
     margin-left: 20px;
 }
 .content ul{

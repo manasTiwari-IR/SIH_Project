@@ -95,7 +95,7 @@ const Resume = () => {
         <div className="left-section">
           <div className="card-wrapper">
             {/* Do's and Don'ts Card */}
-            <div className="card do-dont-card">
+            <div className="card1 do-dont-card">
               <h2>Do's and Don'ts</h2>
               <div className="content">
                 <h3>Do's:</h3>
@@ -129,7 +129,7 @@ const Resume = () => {
             </div>
 
             {/* Instructions Card */}
-            <div className="card">
+            <div className="card1">
               <h2>Instructions</h2>
               <div className="content">
                 <p>
@@ -150,7 +150,7 @@ const Resume = () => {
             </div>
 
             {/* Resume Examples Card */}
-            <div className="card">
+            <div className="card1">
               <h2>Resume Examples</h2>
               <div className="example-grid">
                 <div className="example-card">
@@ -181,7 +181,7 @@ const Resume = () => {
             </div>
 
             {/* AI Resume Prep Card */}
-            <div className="card ai-card">
+            <div className="card1 ai-card">
               <h2>Resume Prep with AI</h2>
               <div className="content">
                 <p>

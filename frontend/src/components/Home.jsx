@@ -8,10 +8,10 @@ function Home() {
     <section className="hero">
       <h1>Get Hired and Create Job</h1>
       <h2>Unlock your potential and land your dream job today!</h2>
-      <Link to={localStorage.getItem('token') ? "/search" : "/signup"} className="start"></Link>
-      <button class="buttongetstart">
+      <Link to={localStorage.getItem('token') ? "/search" : "/signup"} className="start"><button class="buttongetstart">
         <span class="buttongetstart-content">Get Started </span>
-      </button>
+      </button></Link>
+      
       <Link />
       <div className="cta">
         <span>Join us now and start your journey towards success!</span>
