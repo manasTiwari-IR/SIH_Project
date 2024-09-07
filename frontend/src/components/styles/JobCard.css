@@ -1,22 +1,46 @@
-.card{
+.card1{
     border: 3px solid black;
-    background-color: #E0FFFF;
-    border: 3px solid rgba(52, 48, 48, 0.667);
+    background-color: #fcfeea;
+    border: 2px solid rgba(52, 48, 48, 0.667);
     outline: 1px solid black;
     width: 350px;
-    min-height: 250px;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     font-size: large;
-    font-family: monospace;
+    /* font-family: monospace; */
     font-weight: bolder;
-    row-gap: 10px;
+    row-gap: 7px;
     /* padding-top: 10px; */
     border-radius: 20px;
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
+    transition: all 0.1s ease-in-out;
+}
+.card1:hover{
+    /* scale: 1.02; */
+    transform: scale(1.02);
+}
+.card1 div{
+    font-size: 14px;
+    font-weight: 300;
+}
+.card1 span{
+    font-size: 16px;
+    font-weight: 600 ;
 }
 span{
    color: rgb(65, 65, 108);
    font-size: 18px;
+}
+.card1 .company_logo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+.company_logo img{
+    width: 40px;
 }

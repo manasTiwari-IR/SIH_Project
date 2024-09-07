@@ -10,7 +10,7 @@ const UserCard = (props) => {
       <div className="second"><span className="title ">Contact email :</span>{props.item.email}</div>
       <div className="second mr-24"><span className="title">Contact No. :</span>{props.item.number}</div>
       <div className="second about"><div className="title">About:</div> <div className="desc">{props.item.description}</div></div>
-      <div className="title text-xl font-semibold underline">Languages :</div>
+      <div className="title text-xl font-semibold underline">Skills :</div>
       <div className="languages">
       {props.item.ProgrammingLang && props.item.ProgrammingLang.map((lang, index) => (
         <div key={index} className="lang">{lang}</div>
