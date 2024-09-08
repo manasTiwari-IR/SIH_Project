@@ -22,7 +22,7 @@ from sklearn.model_selection import GridSearchCV, cross_val_score
 # In[3]:
 
 
-df = pd.read_csv('../backend/MLmodels/coursera_course_dataset_v3.csv')
+df = pd.read_csv('coursera_course_dataset_v3.csv')
 
 
 # In[4]:
@@ -128,7 +128,7 @@ print(X_train.shape, X_test.shape)
 
 
 from sklearn.neighbors import NearestNeighbors
-knn = NearestNeighbors(n_neighbors=20, metric='cosine')
+knn = NearestNeighbors(n_neighbors=10, metric='cosine')
 knn.fit(X_train)
 
 
@@ -143,6 +143,12 @@ recommended_courses = np.array([y_train.iloc[i] for i in indices])
 
 # Check the shape of the recommended courses (should be: number of test samples, 5)
 print(recommended_courses.shape)
+
+# Display the first test sample's recommendations to check
+for i in range(len(X_test)):
+    print(f"Test Sample {i+1} Actual: {y_test.iloc[i]}")
+    print(f"Recommended: {recommended_courses[i]}")
+    print()
 
 
 # In[18]:
@@ -171,7 +177,7 @@ def recommend_courses(user_skills, model, knn, y_train,urls):
     user_vector = vectorize_user_input(user_skills, model)
     # Reshape the vector for the KNN model (1 sample with the same number of features)
     user_vector = user_vector.reshape(1, -1)
-    # Find th e top 10 nearest neighbors
+    # Find the top 10 nearest neighbors
     distances, indices = knn.kneighbors(user_vector)
     # Get the corresponding course titles for the top 10 recommendations
     recommended_courses = [(y_train.iloc[i], urls.iloc[i])  for i in indices[0]]
@@ -182,19 +188,41 @@ def recommend_courses(user_skills, model, knn, y_train,urls):
 
 
 from flask import Flask, request, jsonify
+
+
+# In[20]:
+
+
+urls = df['course_url']
+user_input_skills = ['Marketing']  # Example input from a user
+
+# Get the top 10 course recommendations along with their URLs
+recommended_courses = recommend_courses(user_input_skills, model, knn, y_train, urls)
+
+# Display the recommendations
+print("Top 10 Course Recommendations:")
+for i, (course, url) in enumerate(recommended_courses, 1):
+    print(f"{i}. {course}")
+    print(f"   URL: {url}")
+
+
 # In[22]:
 
 
 app = Flask(__name__)
 # Assume you've loaded the KNN model and word2vec model already
-@app.route('/predictcourses', methods=['POST'])  # Only POST method is allowed
+@app.route('/predictcourses', methods=['GET'])
 def predict():
-    data = request.json  # Ensure this is a POST request with JSON body
+    data = request.json
     urls = df['course_url']
     user_skills = data['skills']
+    # Vectorize user skills (assuming you have a function for this)
     user_vector = vectorize_user_input(user_skills, model)
+    # Predict top 10 courses
     distances, indices = knn.kneighbors(user_vector.reshape(1, -1))
-    recommended_courses = [{"Course_Title":y_train.iloc[i], "URL":urls.iloc[i]} for i in indices[0]]
+    # Fetch the top 10 course titles and URLs
+    recommended_courses = [(y_train.iloc[i], urls.iloc[i]) for i in indices[0]]
+    # Return predictions as JSON
     return jsonify(recommended_courses)
 if __name__ == '__main__':
     app.run(port=7000, debug=True)
