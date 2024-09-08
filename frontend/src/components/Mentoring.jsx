@@ -19,7 +19,7 @@ const Mentoring = () => {
   return (
     <>
       <div className="some-block">
-        <div className="msg">UNDER CONSTRUCTION</div>
+        <div className="msg">UNDER DEVELOPMENT</div>
       </div>
     </>
   );
