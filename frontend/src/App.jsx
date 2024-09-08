@@ -42,6 +42,7 @@ const App = () => {
             <Route path="createpost" element={<CreatePost showAlert={showAlert} />} />
             <Route path="search" element={<Search showAlert={showAlert} />} />
             <Route path="error" element={<ErrorPage/>}/>
+            <Route path="*" element={<ErrorPage/>}/>
             <Route path="resume" element={<Resume/>}/>
             <Route path="mentoring" element={<Mentoring/>}/>
             <Route path="courses" element={<Courses/>}/>
