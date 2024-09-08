@@ -41,7 +41,11 @@ router.post('/createpost', fetchUser, async (req, res) => {
         res.status(500).json({ success: false, error: "Internal Server Error!" });
     }
 });
-
+//to get all job posts of a user
+// router.get('/getuserposts',fetchUser,async(req,res)=>{
+//     const userId = req.user.id;
+//     const JobPosts = await JobPost.findOne({ user: userId });
+// })
 // Get all job posts
 router.get('/getjobposts', async (req, res) => {
     try {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import "./styles/Resume.css";
+import chatImg from '../assets/file.png'
 
 const Resume = () => {
   const navigate = useNavigate();
@@ -128,7 +129,6 @@ const Resume = () => {
               </div>
             </div>
 
-            {/* Instructions Card */}
             <div className="card1">
               <h2>Instructions</h2>
               <div className="content">
@@ -228,7 +228,6 @@ const Resume = () => {
                 accept=".pdf,.doc,.docx"
                 onChange={handleFileChange}
               />
-
               <p className="file-message">
                 Upload only PDF files with a maximum size of 500KB.
               </p>
@@ -244,6 +243,9 @@ const Resume = () => {
           </div>
         </div>
       </main>
+      <div className="chatbox">
+        <div className="logo"><img src={chatImg} alt="" /></div>
+      </div>
     </div>
   );
 };

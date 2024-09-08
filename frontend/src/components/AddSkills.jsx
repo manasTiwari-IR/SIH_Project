@@ -1,9 +1,9 @@
 import "./styles/AddSkills.css";
 import React, { useState, useEffect } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 function AddSkills(props) {
-  const {user,updateUser}=useUser()
+  const { user, updateUser } = useUser();
   const Language = [
     "C",
     "C#",
@@ -129,7 +129,26 @@ function AddSkills(props) {
   const [desc, setDesc] = useState("");
   const [skills, setSkills] = useState([]);
   const navigate = useNavigate();
+  
 
+
+  //----------------------------------------------------------------------
+  useEffect(() => {
+    updateSkills()
+  }, [updateUser]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [updateUser]);
+
+  useEffect(() => {
+    if (user && user.isCompany && localStorage.getItem("token")) {
+      navigate("/error");
+    }
+  }, [user]);
+//--------------------------------------------------------------------------------
   const addSkill = (skill) => {
     setSkills((prevSkills) =>
       prevSkills.includes(skill)
@@ -137,18 +156,27 @@ function AddSkills(props) {
         : [...prevSkills, skill]
     );
   };
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate('/');
-    }
-  }, [updateUser]);
-
-  useEffect(() => {
-  if (user && user.isCompany && localStorage.getItem("token")) {
-    navigate('/error');
-  }
-}, [user]);
   
+  const updateSkills=async()=>{
+    const response = await fetch(
+      `http://localhost:5000/api/addskills/getuserinfo`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          AuthToken: localStorage.getItem("token"),
+        },
+      }
+    );
+    const json = await response.json();
+    if (json.success) {
+       setDesc(json.userinfo.description)
+       setSkills(json.userinfo.ProgrammingLang)
+    } else {
+       console.log(json.msg)
+    }
+  }
+
   const CheckCard = ({ PropName }) => {
     return (
       <div className="customCheckBoxHolder">
@@ -178,7 +206,7 @@ function AddSkills(props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "AuthToken": localStorage.getItem('token')
+          AuthToken: localStorage.getItem("token"),
         },
         body: JSON.stringify({
           description: desc,
@@ -213,7 +241,9 @@ function AddSkills(props) {
               </div>
               <div className="skillNo">
                 Don't have any skills?
-               <Link to='/'><button type="button">Learn Skills</button></Link> 
+                <Link to="/">
+                  <button type="button">Learn Skills</button>
+                </Link>
               </div>
             </div>
             <div className="form-group-skills">

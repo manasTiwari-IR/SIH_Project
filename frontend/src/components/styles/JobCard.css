@@ -1,4 +1,4 @@
-.card1{
+.card111{
     border: 3px solid black;
     background-color: #fcfeea;
     border: 2px solid rgba(52, 48, 48, 0.667);
@@ -17,15 +17,15 @@
     padding: 15px;
     transition: all 0.1s ease-in-out;
 }
-.card1:hover{
+.card111:hover{
     /* scale: 1.02; */
     transform: scale(1.02);
 }
-.card1 div{
+.card111 div{
     font-size: 14px;
     font-weight: 300;
 }
-.card1 span{
+.card111 span{
     font-size: 16px;
     font-weight: 600 ;
 }
@@ -33,7 +33,7 @@ span{
    color: rgb(65, 65, 108);
    font-size: 18px;
 }
-.card1 .company_logo{
+.card111 .company_logo{
     display: flex;
     justify-content: flex-start;
     align-items: center;

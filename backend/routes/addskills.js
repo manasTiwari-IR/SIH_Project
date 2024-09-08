@@ -15,45 +15,60 @@ router.get('/getallusers', async (req, res) => {
 
 router.post('/adduserinfo', fetchUser, async (req, res) => {
     try {
-        if (!req.body.description) {
-            console.error(error.message);
-            res.status(500).send({success:false,error:"Description Not Provided"})
+        const userId = req.user.id;
+        const userInfo = await UserInfo.findOne({ user: userId });
+        if(!userInfo){
+            if (!req.body.description) {
+                console.error(error.message);
+                res.status(500).send({success:false,error:"Description Not Provided"})
+            }
+            if (!req.body.ProgrammingLang) {
+                console.error(error.message);
+                res.status(500).send({success:false,error:"Choose some Programming Language"})
+            }
+            const userinfo = await UserInfo.create({
+                user: req.user.id,
+                name: req.user.name,
+                pfp: req.user.profilephoto,
+                email: req.user.email,
+                number: req.user.number,
+                description: req.body.description,
+                ProgrammingLang: req.body.ProgrammingLang
+            })
+            res.json({success:true,userinfo})
         }
-        if (!req.body.ProgrammingLang) {
-            console.error(error.message);
-            res.status(500).send({success:false,error:"Choose some Programming Language"})
+        else{
+            const updatedUserinfo = await UserInfo.findOneAndUpdate(
+                { user: userId },
+                {
+                    $set: {
+                        description: req.body.description,
+                        ProgrammingLang: req.body.ProgrammingLang
+                    }
+                },
+                { new: true }
+            );
+            return res.json({ success: true, userinfo: updatedUserinfo });
         }
-        const userinfo = UserInfo.create({
-            user: req.user.id,
-            name: req.user.name,
-            pfp: req.user.profilephoto,
-            email: req.user.email,
-            number: req.user.number,
-            description: req.body.description,
-            ProgrammingLang: req.body.ProgrammingLang
-        })
-        res.json({success:true,userinfo})
     } catch (error) {
         console.error(error.message);
         res.status(500).send({success:false,error:"Internal Server Error!"})
     }
 })
 
-router.post('/edituserinfo/:id', fetchUser, async (req, res) => {
+router.get('/getuserinfo',fetchUser,async(req,res)=>{
     try {
-        const olduserinfo = await UserInfo.findById(req.params.id)
-        if (!olduserinfo) res.status(400).json({ error: "User info not found" })
-        if (req.user.id !== olduserinfo.user.toString())
-            res.status(401).json({ error: "Access denied" })
-        olduserinfo = await UserInfo.findByIdAndUpdate(req.params.id, {
-            description: req.body.description,
-            ProgrammingLang: req.body.ProgrammingLang
-        }, { new: true })
-        res.json(olduserinfo)
-
+        const userId = req.user.id;
+        const userInfo = await UserInfo.findOne({ user: userId });
+        if(userInfo){
+            res.json({success:true,userinfo: userInfo})
+        }
+        else {
+            res.json({success:false,msg:"No skills added"})
+        }
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Internal server error")
+        res.status(500).send({success:false,error:"Internal Server Error!"})
     }
 })
 module.exports = router

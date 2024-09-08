@@ -1,6 +1,7 @@
 import React,{useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import './styles/Mentoring.css'
 const Mentoring = () => {
   const navigate=useNavigate();
   const { user, updateUser } = useUser();
@@ -17,7 +18,9 @@ const Mentoring = () => {
   }, [user]);
   return (
     <>
-      <h1>UNDER DEVELOPMENT</h1>
+      <div className="some-block">
+        <div className="msg">UNDER CONSTRUCTION</div>
+      </div>
     </>
   );
 };

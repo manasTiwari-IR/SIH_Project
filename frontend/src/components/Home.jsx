@@ -8,8 +8,8 @@ function Home() {
     <section className="hero">
       <h1>Get Hired and Create Job</h1>
       <h2>Unlock your potential and land your dream job today!</h2>
-      <Link to={localStorage.getItem('token') ? "/search" : "/signup"} className="start"><button class="buttongetstart">
-        <span class="buttongetstart-content">Get Started </span>
+      <Link to={localStorage.getItem('token') ? "/search" : "/signup"} className="start"><button className="buttongetstart">
+        <span className="buttongetstart-content">Get Started </span>
       </button></Link>
       
       <Link />

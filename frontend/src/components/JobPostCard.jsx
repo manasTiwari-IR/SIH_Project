@@ -2,7 +2,7 @@ import React from "react";
 import './styles/JobCard.css'
 const JobPostCard = (props) => {
   return (
-    <div className="card1">
+    <div className="card111">
       <div className="company_logo">
         {(props.item.CompanyLogo)?
         <img src={props.item.CompanyLogo} alt="" />:
