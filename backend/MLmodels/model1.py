@@ -93,6 +93,20 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print(X_train.shape, X_test.shape)
 
+def get_filtered_dataset(y_train, df):
+    # Ensure `y_train` contains titles from the original DataFrame
+    y_train_set = set(y_train)
+    
+    # Filter the DataFrame to include only rows that are in y_train
+    filtered_df = df[df['Title'].isin(y_train_set)]
+    
+    # Reindex DataFrame to match the order of y_train
+    filtered_df = filtered_df.set_index('Title').reindex(y_train).reset_index()
+    
+    return filtered_df
+
+# Create the consistent dataset
+df2 = get_filtered_dataset(y_train, df)
 
 # In[124]:
 
@@ -148,14 +162,14 @@ app = Flask(__name__)
 @app.route('/predictcourses', methods=['POST'])
 def predict():
     data = request.json
-    urls = df['course_url']
-    ratings=df['Ratings']
-    review_count=df['Review Count']
-    duration=df['Duration']
+    urls = df2['course_url']
+    ratings=df2['Ratings']
+    review_count=df2['Review Count']
+    duration=df2['Duration']
     user_skills = data['skills']
     user_vector = vectorizer.transform([' '.join(user_skills)]).toarray()
     # Predict top 10 courses
-    distances, indices = knn.kneighbors(user_vector.reshape(1, -1))
+    distances,indices = knn.kneighbors(user_vector.reshape(1, -1))
     # Fetch the top 10 course titles and URLs
     recommended_courses = [{"Course_Title":y_train.iloc[i], "URL":urls.iloc[i], "Ratings":ratings.iloc[i],"Review_Count":review_count.iloc[i],"Duration":duration.iloc[i]} for i in indices[0]]
     # Return predictions as JSON
