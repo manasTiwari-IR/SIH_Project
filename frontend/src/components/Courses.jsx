@@ -49,6 +49,7 @@ const Courses = () => {
           Courses.map((course, index) => (
             <div key={index} className="course-card">
               {course.Course_Title}: <a href={course.URL} target="_blank" rel="noopener noreferrer">Link</a>
+              {course.Ratings} , {course.Review_Count},{course.Duration}
             </div>
           ))
         ) : (
