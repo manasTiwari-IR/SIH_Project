@@ -119,8 +119,8 @@ export default function Navbar(props) {
                     colors="primary:#ffffff,secondary:#30e8bd"
                   ></lord-icon>
                 </div>
-                <div className="mr-20 ml-8 text-white font-bold text-3xl">
-                  <span className="text-yellow-200">INTERN</span>et
+                <div className="mr-20 ml-8 text-white font-bold text-2xl">
+                  <span className="text-yellow-200 text-xl mr-1">INTERN</span>IT
                 </div>
                 <div className="hidden md:block">
                   <div className=" flex items-baseline space-x-4">
@@ -326,7 +326,7 @@ export default function Navbar(props) {
       {
         //-----------------------------------------------------User Page--------------------------------------
       }
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <Dialog open={open} onClose={setOpen} className="relative z-50">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"

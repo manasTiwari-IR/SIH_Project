@@ -19,7 +19,6 @@ const Courses = () => {
       const json = await response.json();
       if (json.success) {
         setCourses(json.data);
-        console.log(json.data);
       } else {
         console.log(json.error);
       }

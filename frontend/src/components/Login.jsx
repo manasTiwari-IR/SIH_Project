@@ -26,7 +26,7 @@ const LoginPage = (props) => {
       navigate("/");
       props.showAlert("Welcome back !", "success");
     } else {
-      props.showAlert("Invalid Details try again", "danger");
+      props.showAlert("Invalid Details try again", "warning");
     }
   };
   const onChange = (e) => {

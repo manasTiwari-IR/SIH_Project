@@ -26,12 +26,9 @@
     font-weight: 300;
 }
 .card111 span{
-    font-size: 16px;
     font-weight: 600 ;
-}
-span{
-   color: rgb(65, 65, 108);
-   font-size: 18px;
+    color: rgb(65, 65, 108);
+    font-size: 18px;
 }
 .card111 .company_logo{
     display: flex;

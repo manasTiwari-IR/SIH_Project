@@ -3,7 +3,11 @@ const router = express.Router();
 const fetchuser = require('../middleware/fetchuser');
 const UserInfo = require('../models/UserInfo');
 const axios = require('axios');
+
+
+//Some user Auth Token to test in thunderClient
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZkYjIyNzcxN2VmMmE1OGIwZWU5Nzc2In0sImlhdCI6MTcyNTczMjAwOH0.ERbIzdxMc8cL4_Htkll2YteIrCxxZ7EIC3RTy16lEtA
+
 router.get('/getcourses', fetchuser, async (req, res) => {
     let success = false;
     try {

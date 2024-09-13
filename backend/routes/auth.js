@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
-const privateKey = "$Thequickbrownfoxjumpsoverthelazydog$"
+const privateKey = process.env.PRIVATE_KEY;
 const fetchUser = require('../middleware/FetchUser')
 
 

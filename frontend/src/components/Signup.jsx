@@ -36,7 +36,7 @@ const SignUpPage = (props) => {
       navigate("/");
       props.showAlert("Successfully created an account", "success");
     } else {
-      props.showAlert("Invalid Details try again", "danger");
+      props.showAlert("Invalid Details try again", "warning");
     }
   };
   const onChange = (e) => {
