@@ -120,7 +120,7 @@ export default function Navbar(props) {
                   ></lord-icon>
                 </div>
                 <div className="mr-20 ml-8 text-white font-bold text-2xl">
-                  <span className="text-yellow-200 text-xl mr-1">INTERN</span>IT
+                  <span className="text-yellow-200 text-xl">INTERN</span>et
                 </div>
                 <div className="hidden md:block">
                   <div className=" flex items-baseline space-x-4">

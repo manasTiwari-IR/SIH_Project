@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./styles/Login.css";
 
 const LoginPage = (props) => {
@@ -8,16 +9,28 @@ const LoginPage = (props) => {
     email: "",
     password: "",
   });
+  const [captchaToken, setCaptchaToken] = useState("");
   let navigate = useNavigate();
   const { updateUser } = useUser();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      props.showAlert("Please verify the captcha", "warning");
+      return;
+    }
+
     const response = await fetch(`http://localhost:5000/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: cred.email, password: cred.password }),
+      body: JSON.stringify({
+        email: cred.email,
+        password: cred.password,
+        captcha: captchaToken,
+      }),
     });
     const json = await response.json();
     if (json.success) {
@@ -29,14 +42,21 @@ const LoginPage = (props) => {
       props.showAlert("Invalid Details try again", "warning");
     }
   };
+
   const onChange = (e) => {
     setCred({ ...cred, [e.target.name]: e.target.value });
   };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token); // Set the token when captcha is verified
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
-    } // eslint-disable-next-line
-  }, []);
+    }
+  }, [navigate]);
+
   return (
     <div className="login_box">
       <div className="login-container">
@@ -62,10 +82,15 @@ const LoginPage = (props) => {
               name="password"
               value={cred.password}
               onChange={onChange}
-              placeholder="Enter you password"
+              placeholder="Enter your password"
               required
             />
           </div>
+          <ReCAPTCHA
+            sitekey="6LcccEgqAAAAAFcsZUnKwOUIrycIPdo2xc6_DOZB"
+            onChange={handleCaptchaChange}
+            data-size="compact"
+          />
           <button type="submit">Login</button>
           <p>
             Don't have an account ?{" "}

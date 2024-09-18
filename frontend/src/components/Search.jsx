@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "../context/UserContext";
 import UserCard from "./UserCard";
 import JobPostCard from "./JobPostCard";
+import { useNavigate } from "react-router-dom";
 const Search = (props) => {
   const { user ,updateUser} = useUser();
   const [dataArray, setDataArray] = useState([]);
-
+  const navigate = useNavigate();
   const fetchUsers = async () => {
     const response = await fetch(
       `http://localhost:5000/api/addskills/getallusers`,
