@@ -22,6 +22,25 @@ router.post('/createuser', [
     }
     try {
         //email ko dhundo ki pahle koi same email se aya tha kya?
+
+        const captchaResponse = req.body.captcha;
+        const captchaVerificationUrl = `https://www.google.com/recaptcha/api/siteverify`;
+        
+        const captchaVerifyResponse = await fetch(captchaVerificationUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `secret=${process.env.CAPTCHA_SECRET}&response=${captchaResponse}&remoteip=${req.ip}`
+        });
+
+        const captchaData = await captchaVerifyResponse.json();
+        if (!captchaData.success) {
+            return res.status(400).json({ success: false, error: "Captcha verification failed" });
+        }
+
+
+
         let user = await User.findOne({ email: req.body.email })
         if (user) {
             return res.status(400).json({ success, error: "Sorry this Email id already exists!" });

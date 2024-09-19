@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./styles/Signup.css";
 import { useUser } from "../context/UserContext";
+import ReCAPTCHA from "react-google-recaptcha";
+import "./styles/Signup.css";
 
 const SignUpPage = (props) => {
   const [cred, setCred] = useState({
@@ -11,11 +12,17 @@ const SignUpPage = (props) => {
     password: "",
     isCompany: false,
   });
+  const [captchaToken, setCaptchaToken] = useState("");
   let navigate = useNavigate();
   const { updateUser } = useUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!captchaToken) {
+      props.showAlert("Please verify the captcha", "warning");
+      return;
+    }
     const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
       method: "POST",
       headers: {
@@ -27,6 +34,7 @@ const SignUpPage = (props) => {
         password: cred.password,
         number: cred.number,
         isCompany: cred.isCompany,
+        captcha: captchaToken,
       }),
     });
     const json = await response.json();
@@ -42,6 +50,11 @@ const SignUpPage = (props) => {
   const onChange = (e) => {
     setCred({ ...cred, [e.target.name]: e.target.value });
   };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token); // Set the token when captcha is verified
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/")
@@ -107,24 +120,32 @@ const SignUpPage = (props) => {
             />
           </div>
           <div className="form-group radio-form">
-            <label>Are you here to hire?</label>
+            <label>Purpose : </label>
             <div className="radio_box">
-              <label htmlFor="Yes">Yes</label>
               <input
                 type="radio"
                 id="yes"
                 name="isCompany"
+                hidden
                 onChange={() => setCred({ ...cred, isCompany: true })}
               />
-              <label htmlFor="No">No</label>
+              <label htmlFor="yes" className="check-box">Company</label>
               <input
                 type="radio"
                 id="no"
                 name="isCompany"
+                hidden
+                defaultChecked={true}
                 onChange={() => setCred({ ...cred, isCompany: false })}
               />
+              <label htmlFor="no" className="check-box">Employee</label>
             </div>
           </div>
+          <ReCAPTCHA
+            sitekey="6LcccEgqAAAAAFcsZUnKwOUIrycIPdo2xc6_DOZB"
+            onChange={handleCaptchaChange}
+            data-size="compact"
+          />
           <button type="submit">Sign Up</button>
           <p className="Go-to-login">
             Already have an account?{" "}

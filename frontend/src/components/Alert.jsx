@@ -13,7 +13,7 @@ function Alert(props) {
     };
 
     return (
-        <div style={{ position: 'absolute' }} className="z-30">
+        <div style={{ position: 'fixed' ,bottom:'8px',left:'2px'}} className="z-30">
             {props.alert && isVisible && (
                 <div>
                     {props.alert.type === "success" ? (

@@ -65,12 +65,12 @@ const Resume = () => {
         return;
       }
 
-      // Simulate resume check
-      // const hasDosAndDonts = Math.random() > 0.5; // Randomly simulate success
-      // if (hasDosAndDonts) {
-      //   setRatingResult('Your resume rating: 5/5');
-      // } else {
-      //   setRatingResult('Good resume! However, make sure to include all dos and don\'ts.');
+    //   // Simulate resume check
+    //   // const hasDosAndDonts = Math.random() > 0.5; // Randomly simulate success
+    //   // if (hasDosAndDonts) {
+    //   //   setRatingResult('Your resume rating: 5/5');
+    //   // } else {
+    //   //   setRatingResult('Good resume! However, make sure to include all dos and don\'ts.');
       // }
     } else {
       setRatingResult("Please upload a resume.");
@@ -217,7 +217,7 @@ const Resume = () => {
 
         <div className="right-section">
           {/* Check Resume Capability Card */}
-          <div className="card check-resume-card">
+          <div className="card1 check-resume-card">
             <h2>Check Your Resume Capability</h2>
             <div className="content">
               <p>Upload your resume and check its rating:</p>
